@@ -16,6 +16,11 @@ public class Controller {
     private TextField imputText;
     @FXML
     private TextArea chatArea;
+    private Worker worker;
+
+    public void setWorker(Worker worker){
+        this.worker = worker;
+    }
 
     private ObservableList<String> clientsList = FXCollections.observableArrayList(
             "Клиент 1",
@@ -41,11 +46,19 @@ public class Controller {
             alert.showAndWait();
         }else {
             addMsgChat(message);
+            worker.sendMsg(message);
         }
         imputText.clear();
     }
 
     private void addMsgChat(String message) {
         chatArea.appendText(message + "\n");
+
     }
+
+    public void getMsg(String msg){
+        chatArea.appendText("Сервер: " + msg + "\n");
+    }
+
+
 }
